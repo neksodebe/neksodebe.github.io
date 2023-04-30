@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Niko - Portfolio</title>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="effects.css">
+</head>
+
+<body>
+    <pre id="bg-pre">
+        <code id="bg-code" data-text="interface Particle {
+            x: number;
+            y: number;
+            radius: number;
+            color: string;
+            speed: number;
+            velocity: {
+              x: number;
+              y: number;
+            };
+          }
+          
+          class ParticleGenerator {
+            private canvas: HTMLCanvasElement;
+            private ctx: CanvasRenderingContext2D;
+            private particleCount: number;
+            private particles: Particle[];
+            private colors: string[];
+          
+            constructor(canvas: HTMLCanvasElement, particleCount: number) {
+              this.canvas = canvas;
+              this.ctx = canvas.getContext('2d');
+              this.particleCount = particleCount;
+              this.particles = [];
+              this.colors = ['#0A1F34', '#066E7B', '#FFD15C', '#FF8811', '#FF4E00'];
+            }
+          
+            private init(): void {
+              for (let i = 0; i < this.particleCount; i++) {
+                const radius = Math.random() * 2 + 1;
+                const x = Math.random() * (this.canvas.width - radius * 2) + radius;
+                const y = Math.random() * (this.canvas.height - radius * 2) + radius;
+                const color = this.colors[Math.floor(Math.random() * this.colors.length)];
+                const speed = Math.random() * 2 + 1;
+                const angle = Math.random() * Math.PI * 2;
+                const velocity = {
+                  x: Math.cos(angle) * speed,
+                  y: Math.sin(angle) * speed,
+                };
+          
+                this.particles.push({ x, y, radius, color, speed, velocity });
+              }
+            }
+          
+            private animate(): void {
+              requestAnimationFrame(() => this.animate());
+          
+              this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+          
+              this.particles.forEach((particle) => {
+                particle.x += particle.velocity.x;
+                particle.y += particle.velocity.y;
+          
+                if (particle.x + particle.radius > this.canvas.width || particle.x - particle.radius < 0) {
+                  particle.velocity.x = -particle.velocity.x;
+                }
+          
+                if (particle.y + particle.radius > this.canvas.height || particle.y - particle.radius < 0) {
+                  particle.velocity.y = -particle.velocity.y;
+                }
+          
+                this.ctx.beginPath();
+                this.ctx.arc(particle.x, particle.y, particle.radius, 0, Math.PI * 2);
+                this.ctx.fillStyle = particle.color;
+                this.ctx.fill();
+              });
+            }
+          
+            public start(): void {
+              this.init();
+              this.animate();
+            }
+          }
+          
+          const canvas = document.getElementById('background') as HTMLCanvasElement;
+          const particleGenerator = new ParticleGenerator(canvas, 100);
+          particleGenerator.start();
+          "></code>
+    </pre>
+
+    <span id="warning">This portfolio is still a work in progress :)</span>
+    <div id="container">
+        <div class="title">
+            <div id="rightaligned-content-div">
+                <p>
+                    Hi, I'm Niko.
+                </p>
+                <span class="subtitle">and I specialize in back-end, and front-end scripting</span>
+
+                <span class="sectiontitle">I am experienced with:</span>
+
+                <section class="languages">
+                    <div class="language-box">
+                      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" alt="NodeJS logo">
+                      <span>NodeJS</span>
+                    </div>
+                    <div class="language-box">
+                      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript logo">
+                      <span>JavaScript</span>
+                    </div>
+                    <div class="language-box">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" alt="TypeScript logo">
+                        <span>TypeScript</span>
+                    </div>
+                    <div class="language-box">
+                      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="PostgreSQL logo">
+                      <span>MySQL</span>
+                    </div>
+                    <div class="language-box">
+                      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React logo">
+                      <span>React</span>
+                    </div>
+                  </section>
+                  <a href="./languages/"><p class="span more-link">Show more..</p></a>
+
+                  <span class="sectiontitle">My past projects:</span>
+
+                <section class="languages">
+                    <div class="language-box">
+                        <img src="parottu.png" alt="Parottu logo">
+                        <a href="https://www.parottu.me" target="_blank"><span>Parottu</span></a>
+                    </div>
+                    <div class="language-box">
+                      <img src="roomber-logo.png" alt="Roomber logo">
+                      <a href="https://github.com/roomber-dev/roomber" target="_blank"><span>Roomber</span></a>
+                    </div>
+                  </section>
+
+                <br>
+                <span>I am looking to work and collaborate with companies or individuals, and provide them with a safe and reliable back-end.<br><br>I also provide a variety of front-end functionality, including:</span>
+                <br><br><hr>
+                <ul>
+                    <li>Creating interactive and responsive user interfaces using modern web technologies such as HTML, CSS, and JavaScript.</li>
+                    <li>Integrating third-party APIs and services to extend website functionality and improve user experience.</li>
+                </ul><hr>
+                <br>
+                <span>With my strong problem-solving skills and attention to detail, I am committed to delivering high-quality work and meeting project deadlines. Contact me to discuss how we can work together to bring your project to life.</span>
+            </div>
+            
+            
+        </div>
+
+        <div id="popup"></div>
+        <script src="effects.js"></script>
+</body>
+
+</html>
